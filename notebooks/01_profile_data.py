@@ -1,0 +1,30 @@
+import pandas as pd
+
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', 150)
+
+campaign = pd.read_csv('../data/raw/marketing_campaign_dataset.csv')
+touchpoints = pd.read_csv('../data/raw/multi_touch_attribution_data.csv')
+
+print("="*70)
+print("CAMPAIGN DATASET")
+print("="*70)
+print("Shape:", campaign.shape)
+print("\nDtypes:\n", campaign.dtypes)
+print("\nNulls:\n", campaign.isnull().sum())
+print("\nUnique Channel_Used:", sorted(campaign['Channel_Used'].unique()))
+print("\nUnique Campaign_Type:", sorted(campaign['Campaign_Type'].unique()))
+print("\nDate range:", campaign['Date'].min(), "to", campaign['Date'].max())
+print("\nROI stats:\n", campaign['ROI'].describe())
+
+print("\n" + "="*70)
+print("TOUCHPOINT DATASET")
+print("="*70)
+print("Shape:", touchpoints.shape)
+print("\nDtypes:\n", touchpoints.dtypes)
+print("\nNulls:\n", touchpoints.isnull().sum())
+print("\nUnique Channel:", sorted(touchpoints['Channel'].unique()))
+print("\nConversion value counts:\n", touchpoints['Conversion'].value_counts())
+print("\nDate range:", touchpoints['Timestamp'].min(), "to", touchpoints['Timestamp'].max())
+print("\nUnique users:", touchpoints['User ID'].nunique())
+print("\nAvg touchpoints per user:", len(touchpoints) / touchpoints['User ID'].nunique())
